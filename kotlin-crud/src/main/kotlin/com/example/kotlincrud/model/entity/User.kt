@@ -1,7 +1,5 @@
 package com.example.kotlincrud.model.entity
 
-import com.example.kotlincrud.model.dto.RequestUser
-import com.example.kotlincrud.model.dto.SimpleUser
 import javax.persistence.*
 
 @Entity

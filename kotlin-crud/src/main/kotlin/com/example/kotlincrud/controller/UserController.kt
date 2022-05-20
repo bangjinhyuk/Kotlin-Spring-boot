@@ -1,6 +1,5 @@
 package com.example.kotlincrud.controller
 
-import com.example.kotlincrud.model.dto.RequestUser
 import com.example.kotlincrud.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity

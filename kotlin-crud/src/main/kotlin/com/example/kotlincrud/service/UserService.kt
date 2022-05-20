@@ -1,7 +1,5 @@
 package com.example.kotlincrud.service
 
-import com.example.kotlincrud.model.dto.RequestUser
-import com.example.kotlincrud.model.dto.SimpleUser
 import com.example.kotlincrud.model.entity.User
 
 interface UserService {

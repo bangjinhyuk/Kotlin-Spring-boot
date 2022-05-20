@@ -2,14 +2,10 @@ package com.example.kotlincrud.service
 
 import com.example.kotlincrud.exception.BaseException
 import com.example.kotlincrud.exception.BaseResponseCode
-import com.example.kotlincrud.model.dto.RequestUser
-import com.example.kotlincrud.model.dto.SimpleUser
 import com.example.kotlincrud.model.entity.User
 import com.example.kotlincrud.model.repository.UserRepository
-import org.springframework.boot.context.properties.bind.Bindable.listOf
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import java.sql.DriverManager.println
 
 @Service
 class UserServiceImpl(
