@@ -1,5 +1,7 @@
 package com.example.kotlincrud.controller
 
+import com.example.kotlincrud.model.dto.*
+import com.example.kotlincrud.model.entity.User
 import com.example.kotlincrud.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
@@ -18,17 +20,17 @@ class UserController {
     }
 
     @PostMapping("/user")
-    private fun createUser(@RequestBody requestUser: RequestUser): ResponseEntity<Any> {
-        return ResponseEntity.ok(userService.createUser(requestUser))
+    private fun createUser(@RequestBody registerRequest: RegisterRequest): ResponseEntity<SimpleUser> {
+        return ResponseEntity.ok(userService.createUser(registerRequest))
     }
 
-    @GetMapping("/login")
-    private fun login(@RequestParam name: String, @RequestParam password: String) : ResponseEntity<Any> {
-        return ResponseEntity.ok(userService.login(name,password))
+    @PostMapping("/login")
+    private fun login(@RequestBody loginRequest: LoginRequest) : ResponseEntity<LoginResponse> {
+        return ResponseEntity.ok(userService.login(loginRequest))
     }
 
     @PatchMapping("/user")
-    private fun update(@RequestBody requestUser: RequestUser) : ResponseEntity<Any> {
-        return ResponseEntity.ok(userService.update(requestUser))
+    private fun update(@RequestAttribute user: User, @RequestBody updateRequest: UpdateRequest) : ResponseEntity<SimpleUser> {
+        return ResponseEntity.ok(userService.update(user, updateRequest))
     }
 }

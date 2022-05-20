@@ -2,50 +2,45 @@ package com.example.kotlincrud.service
 
 import com.example.kotlincrud.exception.BaseException
 import com.example.kotlincrud.exception.BaseResponseCode
+import com.example.kotlincrud.model.dto.*
 import com.example.kotlincrud.model.entity.User
 import com.example.kotlincrud.model.repository.UserRepository
+import com.example.kotlincrud.utils.JwtUtils
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
 class UserServiceImpl(
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val jwtUtils: JwtUtils
 ) : UserService {
 
     @Transactional(readOnly = true)
-    override fun findAllUsers(): List<User> {
-        return userRepository.findAllBy()
-    }
+    override fun findAllUsers(): List<User>  = userRepository.findAllBy()
+
 
     @Transactional
-    override fun createUser(requestUser: RequestUser): SimpleUser {
-
-        var user = User(
-            name = requestUser.name,
-            password = requestUser.password,
-            gender = requestUser.gender
-        )
-
-        return userRepository.save(user).createSimpleUser()
-    }
+    override fun createUser(registerRequest: RegisterRequest): SimpleUser = userRepository.save(registerRequest.toUser()).makeSimpleUser()
 
     @Transactional(readOnly = true)
-    override fun login(name: String, password: String): Any? {
-        var user = userRepository.findByNameAndPassword(name,password)
-        if(user.isPresent)
-            return "Token"
-        else
+    override fun login(loginRequest: LoginRequest): LoginResponse {
+        var user = userRepository.findByEmail(loginRequest.email)
+
+        if(user.isPresent) {
+            if(BCryptPasswordEncoder().matches(loginRequest.password, user.get().password)) {
+                return jwtUtils.createToken(user.get())
+            }else
+                throw BaseException(BaseResponseCode.INVALID_PASSWORD)
+        }else
             throw BaseException(BaseResponseCode.USER_NOT_FOUND)
     }
 
     @Transactional
-    override fun update(requestUser: RequestUser): SimpleUser {
-        var user = userRepository.findByName(requestUser.name)
-
-        if(user.isPresent)
-            return user.get().updateUser(requestUser)
-        else
-            throw BaseException(BaseResponseCode.USER_NOT_FOUND)
+    override fun update(user: User, updateRequest: UpdateRequest): SimpleUser? {
+        user.updateUser(updateRequest)
+        userRepository.save(user)
+        return user.makeSimpleUser()
     }
 
 }
