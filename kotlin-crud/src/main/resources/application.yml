@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/kotlin?serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/kotlin-exam?serverTimezone=UTC
     username: root
-    password: kongtech
+    password: 1234
 
   jpa:
     hibernate:
@@ -13,3 +13,5 @@ spring:
 
 server:
   port: 9091
+
+secret: secret
