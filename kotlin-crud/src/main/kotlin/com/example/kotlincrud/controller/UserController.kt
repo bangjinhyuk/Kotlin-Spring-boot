@@ -6,6 +6,7 @@ import com.example.kotlincrud.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import javax.validation.Valid
 
 @RestController
 @RequestMapping
@@ -20,12 +21,12 @@ class UserController {
     }
 
     @PostMapping("/user")
-    private fun createUser(@RequestBody registerRequest: RegisterRequest): ResponseEntity<SimpleUser> {
+    private fun createUser(@Valid  @RequestBody registerRequest: RegisterRequest): ResponseEntity<SimpleUser> {
         return ResponseEntity.ok(userService.createUser(registerRequest))
     }
 
     @PostMapping("/login")
-    private fun login(@RequestBody loginRequest: LoginRequest) : ResponseEntity<LoginResponse> {
+    private fun login(@Valid @RequestBody loginRequest: LoginRequest) : ResponseEntity<LoginResponse> {
         return ResponseEntity.ok(userService.login(loginRequest))
     }
 
