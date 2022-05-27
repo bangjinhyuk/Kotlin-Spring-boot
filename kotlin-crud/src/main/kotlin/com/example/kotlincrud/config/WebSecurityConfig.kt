@@ -1,6 +1,6 @@
 package com.example.kotlincrud.config
 
-import com.example.kotlincrud.Filter.JwtFilter
+import com.example.kotlincrud.filter.JwtFilter
 import com.example.kotlincrud.service.UserDetailsServiceImpl
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

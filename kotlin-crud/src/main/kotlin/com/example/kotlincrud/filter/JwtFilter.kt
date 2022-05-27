@@ -1,6 +1,5 @@
-package com.example.kotlincrud.Filter
+package com.example.kotlincrud.filter
 
-import com.example.kotlincrud.model.entity.User
 import com.example.kotlincrud.model.repository.UserRepository
 import com.example.kotlincrud.utils.JwtUtils
 import org.springframework.security.core.Authentication

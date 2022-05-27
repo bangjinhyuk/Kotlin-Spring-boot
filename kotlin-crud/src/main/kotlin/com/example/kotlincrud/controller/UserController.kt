@@ -21,7 +21,7 @@ class UserController {
     }
 
     @PostMapping("/user")
-    private fun createUser(@Valid  @RequestBody registerRequest: RegisterRequest): ResponseEntity<SimpleUser> {
+    private fun createUser(@Valid @RequestBody registerRequest: RegisterRequest): ResponseEntity<SimpleUser> {
         return ResponseEntity.ok(userService.createUser(registerRequest))
     }
 
