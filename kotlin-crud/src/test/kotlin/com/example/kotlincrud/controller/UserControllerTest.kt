@@ -51,7 +51,7 @@ internal class UserControllerTest{
     @Test
     fun createUserTest(){
         //given
-        var registerRequest =
+        val registerRequest =
             RegisterRequest(
                 name = "방진혁",
                 email = "jinhyuk0103@gmail.com",
